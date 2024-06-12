@@ -27,4 +27,18 @@ class Student:
     @property
     def email(self):
         return f"{self._first_name.lower()}.{self._last_name.lower()}@email.com"
+    """
+
+    steps to solve the challenge
+    - create a new test method called test_apply_extension
+    - Inside test_apply_extension, store the current end_date for our student instance in a variable called old_end_date
+    - Call a method named apply_extension that will take a number od days as an argument on the student instance to update the end_date
+    - Assert the instance's end_date equals the old end date plus the says argument that was passed in the using timedelta
+    - Rin the tests to confirm that the new method is failing
+    - Om the student class, create a new method called apply_extension that has a parameter called days
+    - Use the timedelta method from datetime to update the end_date property
+    - Run the tests to confirm they are working
+    """
+    def apply_extension(self, period):
+        self.end_date = self.end_date+timedelta(days=period)
         

@@ -1,6 +1,9 @@
 import unittest
 from student import Student
 
+# we need to import the timedelta 
+from datetime import timedelta
+
 
 class TestStudent(unittest.TestCase):
     """
@@ -32,7 +35,7 @@ class TestStudent(unittest.TestCase):
     def tearDownClass(cls):
         print("Tear down class method")
 
-        
+
     def setUp(self):
         print("Set Up method")
         self.student=Student("John","Doe")
@@ -62,6 +65,17 @@ class TestStudent(unittest.TestCase):
         #student = Student("John", "Doe")
         self.assertEqual(self.student.email,"john.doe@email.com")
 
+    # test a method of apply_extension method whether it modifies the the end_date attributes
+    def test_apply_extension(self):
+        print("Apple extension date")
+        # store student current end date in a variable
+        old_end_date = self.student.end_date
+
+        #call the function 
+        self.student.apply_extension(5)
+        
+        # use assert equal to compare
+        self.assertEqual(self.student.end_date, old_end_date+timedelta(days=5))
 
 
 if __name__ == '__main__':
