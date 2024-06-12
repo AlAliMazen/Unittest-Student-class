@@ -4,6 +4,9 @@ from student import Student
 # we need to import the timedelta 
 from datetime import timedelta
 
+# to make use of Mocking we need to import the patch package from unittest
+from unittest.mock import patch
+
 
 class TestStudent(unittest.TestCase):
     """
@@ -76,6 +79,18 @@ class TestStudent(unittest.TestCase):
         
         # use assert equal to compare
         self.assertEqual(self.student.end_date, old_end_date+timedelta(days=5))
+    
+    # important to make 
+    def test_course_schedule(self):
+        print("Course schedule method")
+        # first we need the patch function for making a context manager
+        with patch("student.requests.get") as mocked_get:
+            mocked_get.return_value.ok = True
+            mocked_get.return_value.text = "Success"
+
+            schedule = self.student.course_schedule()
+            self.assertEqual(schedule, "Success")
+
 
 
 if __name__ == '__main__':

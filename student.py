@@ -1,5 +1,7 @@
 # import the header for time and date
 from datetime import date, timedelta
+# we can also create test using mock to test method which makes requests to external API, but when the success and when they fail
+import requests
 
 
 class Student:
@@ -41,4 +43,18 @@ class Student:
     """
     def apply_extension(self, period):
         self.end_date = self.end_date+timedelta(days=period)
+
+    
+    # method which apply the mock concept when making external requests
+    def course_schedule(self):
+        response = requests.get(f"https://company.com/course-schedule/{self._last_name}/{self._first_name}")
+
+        # check the response
+        if response.ok:
+            return response.text
+        else:
+            return "Something went wrong with the request!"
+
+    
+
         
